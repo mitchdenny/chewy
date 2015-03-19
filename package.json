@@ -17,6 +17,9 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
+  "bin": {
+    "chewy": "./bin/chewy"
+  },
   "bugs": {
     "url": "https://github.com/mitchdenny/chewy/issues"
   },
