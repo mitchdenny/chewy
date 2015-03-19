@@ -1,3 +1,18 @@
 #!/usr/bin/env node
 var chewy = require('../index');
 console.log(chewy);
+
+var readline = require('readline');
+var interface = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+interface.setPrompt('chewy> ');
+interface.prompt();
+
+interface.on('line', function(line) {
+  console.log(line);
+}).on('close', function() {
+  console.log('May the force be with you.');
+});
