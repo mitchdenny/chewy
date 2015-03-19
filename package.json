@@ -1,6 +1,6 @@
 {
   "name": "chewy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Named after perhaps the best sci-fi sidekick in history, Chewy is an experiment into building a JavaScript powered command-shell and associated infrastructure, inspired by PowerShell.",
   "main": "index.js",
   "scripts": {
