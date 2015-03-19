@@ -1,0 +1,32 @@
+{
+  "name": "chewy",
+  "version": "0.1.0",
+  "description": "Named after perhaps the best sci-fi sidekick in history, Chewy is an experiment into building a JavaScript powered command-shell and associated infrastructure, inspired by PowerShell.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/mitchdenny/chewy"
+  },
+  "author": "Mitch Denny <mitch@mitchdenny.com> (http://mitchdenny.com/)",
+  "license": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/mitchdenny/chewy/issues"
+  },
+  "homepage": "https://github.com/mitchdenny/chewy",
+  "dependencies": {
+    "nopt": "^3.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-release": "^0.11.0"
+  }
+}
