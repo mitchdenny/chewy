@@ -1,12 +1,30 @@
 var util = require('util');
 
+var Argument = function(long, short, validator) {
+  var self = this;
+  self.validator = validator;
+
+  self.public = {
+    long: long,
+    short: short
+  };
+
+  return self.public;
+}
+
 var Command = function(verb, noun, itemProcessor) {
   var self = this;
   self.itemProcessor = itemProcessor;
 
   self.public = {
     verb: verb,
-    noun: noun
+    noun: noun,
+    arguments: {}
+    addArgument: function(long, short, validator) {
+      var argument = new Argument(long, short, validator);
+      self.public.arguents[long] = argument;
+      return argument;
+    }
   };
 
   return self.public;
@@ -47,11 +65,15 @@ var Chewy = function() {
 var chewy = new Chewy();
 var extension = chewy.extend(chewy);
 
-var getCommandCommand = extension.addCommand('get', 'command', function(context, item) {
+var getCommand = extension.addCommand('get', 'command', function(context, item) {
   context.writeItem(item);
 });
 
-var importPackageCommand = extension.addCommand('import', 'package', function(context, item) {
+getCommand.addArgument('package', 'p', function(argument) {
+  return true; 
+});
+
+var importPackage = extension.addCommand('import', 'package', function(context, item) {
   context.writeItem(item);
 });
 
