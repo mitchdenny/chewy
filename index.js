@@ -1,58 +1,58 @@
-var Context = function() {
-  var self = this;
-
-  return {
-    writeItem: function(item) {
-
-    }
-  };
-};
+var util = require('util');
 
 var Command = function(verb, noun, itemProcessor) {
   var self = this;
-  self.verb = verb;
-  self.noun = noun;
   self.itemProcessor = itemProcessor;
 
-  return {
-    process: function(context, item) {
-      self.itemProcessor(context, item);
-    }
+  self.public = {
+    verb: verb,
+    noun: noun
   };
+
+  return self.public;
 };
 
 var Extension = function(module) {
   var self = this;
-  self.commands = [];
+  self.module = module;
 
-  return {
-    addCommand: function(verb, noun, itemProcessor) {
-      var command = new Command(verb, noun, itemProcessor);
-      self.commands.push(command);
-      return command;
-    },
-    getCommands: function() {
-      return self.commands;
-    }
+  self.public = {
+      commands: {},
+      addCommand: function(verb, noun, itemProcessor) {
+        var command = new Command(verb, noun, itemProcessor);
+        var commandText = util.format('%s-%s', verb, noun);
+        self.public.commands[commandText] = command;
+        return command;
+      }
   };
+
+  return self.public;
 };
 
 var Chewy = function() {
   var self = this;
 
-  return {
+  self.public = {
+    extensions: [],
     extend: function(module) {
       var extension = new Extension(module);
+      self.public.extensions.push(extension);
       return extension;
     }
   };
-}
+
+  return self.public;
+};
 
 var chewy = new Chewy();
 var extension = chewy.extend(chewy);
 
-extension.addCommand('get', 'command', function(context, item) {
+var getCommandCommand = extension.addCommand('get', 'command', function(context, item) {
+  context.writeItem(item);
+});
 
+var importPackageCommand = extension.addCommand('import', 'package', function(context, item) {
+  context.writeItem(item);
 });
 
 module.exports = chewy;
