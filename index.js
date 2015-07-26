@@ -19,10 +19,10 @@ var Command = function(verb, noun, itemProcessor) {
   self.public = {
     verb: verb,
     noun: noun,
-    arguments: {}
+    arguments: {},
     addArgument: function(long, short, validator) {
       var argument = new Argument(long, short, validator);
-      self.public.arguents[long] = argument;
+      self.public.arguments[long] = argument;
       return argument;
     }
   };
@@ -43,6 +43,8 @@ var Extension = function(module) {
         return command;
       }
   };
+
+  self.module.__chewy = self.public;
 
   return self.public;
 };
@@ -70,11 +72,15 @@ var getCommand = extension.addCommand('get', 'command', function(context, item) 
 });
 
 getCommand.addArgument('package', 'p', function(argument) {
-  return true; 
+  return argument != null;
 });
 
 var importPackage = extension.addCommand('import', 'package', function(context, item) {
   context.writeItem(item);
+});
+
+importPackage.addArgument('package', 'p', function(argument) {
+  return argument != null;
 });
 
 module.exports = chewy;
