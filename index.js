@@ -49,6 +49,38 @@ var Extension = function(module) {
   return self.public;
 };
 
+var Shell = function() {
+  var self = this;
+
+  self.public = {
+
+  };
+
+  return self.public;
+};
+
+var Pipeline = function() {
+  var self = this;
+
+  self.public = {
+  };
+
+  return self.public;
+};
+
+var Workspace = function() {
+  var self = this;
+
+  self.public = {
+    createPipeline: function(invocation) {
+      var pipeline = new Pipeline();
+      return pipeline;
+    }
+  };
+
+  return self.public;
+};
+
 var Chewy = function() {
   var self = this;
 
@@ -58,6 +90,10 @@ var Chewy = function() {
       var extension = new Extension(module);
       self.public.extensions.push(extension);
       return extension;
+    },
+    createWorkspace: function() {
+      var workspace = new Workspace();
+      return workspace;
     }
   };
 
